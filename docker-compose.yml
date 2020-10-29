@@ -4,15 +4,17 @@ services:
 
   redis:
     image: redis
-    container_name: cache
+    ports:
+      - 6379:6379
     expose:
-      - 6379
+      - "6379"
+    container_name: cache
   node:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'docker.io/bitnami/node:12-debian-10'
     command: sh -c 'npm install && node app'
     ports:
-      - 3000:3000
+      - 3001:3000
     volumes:
       - .:/app
     links:
