@@ -5,16 +5,14 @@ const cache = require("../helpers/cache");
 
 const Router = express.Router();
 
-Router.get("/search", async (req, res) => {
+Router.get("/search", async(req, res) => {
   try {
     const { q } = req.query;
     if (!q) return res.send({ error: "Invalid query!" });
     const cachedResults = await cache.getResults(q);
-    if (cachedResults) return res.send({ results: cachedResults });
+    if (cachedResults) return res.send({ results: cachedResults, cached: true });
     let freshResults = await youtube.search(
-      q,
-      { safeSearch: true },
-      { safeSearch: true, headers: { Cookie: "PREF=f2=8000000" } }
+      q, { safeSearch: true }, { safeSearch: true, headers: { Cookie: "PREF=f2=8000000" } }
     );
     freshResults = freshResults.map((video) => ({
       id: video.id,
@@ -22,7 +20,8 @@ Router.get("/search", async (req, res) => {
     }));
     res.send({ results: freshResults, length: freshResults.length });
     await cache.saveResults(q, freshResults);
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error);
     res.send({ error: "Backend has occured!" });
   }
