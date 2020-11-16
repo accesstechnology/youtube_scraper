@@ -9,11 +9,11 @@ services:
     expose:
       - "6379"
     container_name: cache
+    command: sh -c 'redis-server --bind youtube_test_php_1'
   node:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'docker.io/bitnami/node:12-debian-10'
     command: sh -c 'npm install && node app'
-    command: sh -c 'redis-server --bind cache'
     ports:
       - 3001:3000
     volumes:
