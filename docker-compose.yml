@@ -9,7 +9,7 @@ services:
     expose:
       - "6379"
     container_name: cache
-    command: sh -c 'redis-server --bind 172.30.0.2 0.0.0.0 127.0.0.1'
+    command: sh -c 'redis-server --bind 0.0.0.0'
   node:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'docker.io/bitnami/node:12-debian-10'
