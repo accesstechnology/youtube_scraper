@@ -11,7 +11,7 @@ services:
     container_name: cache
     command: sh -c 'redis-server --bind 0.0.0.0'
     networks:
-      - scraper-network
+      - youtubescraper_default
   node:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'docker.io/bitnami/node:12-debian-10'
@@ -25,4 +25,4 @@ services:
     environment:
       - REDIS_URL=redis://cache
     networks:
-      - scraper-network
+      - youtubescraper_default
