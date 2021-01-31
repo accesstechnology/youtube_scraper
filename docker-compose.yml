@@ -1,7 +1,5 @@
 version: '2'
-networks:
-  youtube_scraper:
-    external: true
+
 services:
 
   redis:
@@ -12,9 +10,6 @@ services:
       - "6379"
     container_name: cache
     command: sh -c 'redis-server --bind 0.0.0.0'
-    networks:
-      - youtube_scraper
-    hostname: redis
   node:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'docker.io/bitnami/node:12-debian-10'
@@ -27,5 +22,3 @@ services:
       - redis
     environment:
       - REDIS_URL=redis://cache
-    networks:
-      - youtube_scraper
