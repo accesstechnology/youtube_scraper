@@ -1,5 +1,5 @@
 const redis = require("redis");
-const client = redis.createClient({host:'cache'});
+const client = redis.createClient({host:'youtube_cache'});
 
 client.on("error", (error) => console.error(error));
 

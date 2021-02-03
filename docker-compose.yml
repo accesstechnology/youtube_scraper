@@ -3,6 +3,8 @@ version: '2'
 services:
 
   redis:
+    networks:
+      - youtube
     image: redis
     ports:
       - 6379:6379
@@ -23,3 +25,9 @@ services:
     environment:
       - REDIS_URL=redis://youtube_cache
     container_name: youtube_scraper
+    networks:
+      - youtube
+
+networks:
+  youtube:
+    external: true
