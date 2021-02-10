@@ -12,13 +12,12 @@ services:
       - "6379"
     container_name: youtube_cache
     command: sh -c 'redis-server --bind 0.0.0.0'
+
   node:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'docker.io/bitnami/node:12-debian-10'
-    command: sh -c 'npm install && node app'
-    ports:
-      - 3001:3000
-    volumes:
+    command: sh -c 'npm install && npm rebuild && node app'
+    volumes:  
       - .:/app
     links:
       - redis

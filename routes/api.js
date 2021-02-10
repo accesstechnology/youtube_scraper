@@ -22,7 +22,7 @@ Router.get("/search", async (req, res) => {
       { safeSearch: true },
       { safeSearch: true, headers: { Cookie: "PREF=f2=8000000" } }
     );
-    freshResults = freshResults.map((video) => ({
+    freshResults = freshResults.videos.map((video) => ({
       id: video.id,
       title: video.title,
     }));
