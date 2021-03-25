@@ -12,6 +12,7 @@ services:
       - "6379"
     container_name: youtube_cache
     command: sh -c 'redis-server --bind 0.0.0.0'
+    restart: always
 
   node:
     tty: true # Enables debugging capabilities when attached to this container.
@@ -26,6 +27,7 @@ services:
     container_name: youtube_scraper
     networks:
       - youtube
+    restart: always
 
 networks:
   youtube:
